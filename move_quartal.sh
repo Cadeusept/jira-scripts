@@ -361,7 +361,7 @@ for ((i = 0; i < ${#source_keys[@]}; i++)); do
   fi
 
   children_jsonl="$(search_issues \
-    "${project_jql} AND ${relation_jql} AND statusCategory != Done ORDER BY key" '')"
+    "${project_jql} AND ${relation_jql} AND statusCategory != Done AND status NOT IN (\"ready for test\", \"ready to check\") ORDER BY key" '')"
 
   if [[ -z "$children_jsonl" ]]; then
     log "No non-completed issues in $source_key"

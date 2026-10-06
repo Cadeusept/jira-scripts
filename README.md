@@ -195,7 +195,8 @@ through `-q` or `--quartal`, the script:
 4. Checks whether an epic with that exact target summary already exists. If it
    does, the script reuses it; otherwise, it creates the new epic.
 5. Finds direct issues in each source epic whose Jira status category is not
-   `Done`.
+   `Done` and whose lowercase status is neither `ready for test` nor
+   `ready to check`.
 6. Sets their Epic Link (or Jira Cloud parent field) to the matching new epic.
 
 For example:
@@ -207,7 +208,9 @@ Observability 26Q4  -> Observability 27Q1
 
 An issue is considered completed based on Jira's `Done` status category, not a
 hard-coded status name. Custom statuses such as `Closed` or `Resolved` are left
-in the old epic when Jira assigns them to the `Done` category.
+in the old epic when Jira assigns them to the `Done` category. Issues in
+`Ready for Test` or `Ready to check` are also always left in the old epic; the
+JQL comparison uses their lowercase names.
 
 ### Preview changes
 
